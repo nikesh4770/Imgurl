@@ -2,12 +2,15 @@ package com.axxess.assignmentnikesh.room
 
 import androidx.lifecycle.LiveData
 import com.axxess.assignmentnikesh.network.model.Comment
+import javax.inject.Inject
 
+class CommentRepository @Inject constructor(var commentDao: CommentDao) {
 
-interface CommentRepository {
-    fun findById(id: Int): LiveData<Comment?>?
-    fun findAll(imageId: String): LiveData<List<Comment?>?>?
-    fun insert(comment: Comment?)
-//    fun delete(product: Comment?): Int
+    fun findAll(imageId: String): LiveData<List<Comment?>?>? {
+        return commentDao.findAll(imageId)
+    }
 
+    fun insert(comment: Comment?) {
+        commentDao.insert(comment)
+    }
 }

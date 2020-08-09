@@ -5,11 +5,9 @@ import androidx.annotation.NonNull
 import androidx.room.Room
 import com.axxess.assignmentnikesh.room.AppDatabase
 import com.axxess.assignmentnikesh.room.CommentDao
-import com.axxess.assignmentnikesh.room.CommentDataSource
 import com.axxess.assignmentnikesh.room.CommentRepository
 import dagger.Module
 import dagger.Provides
-import javax.inject.Inject
 import javax.inject.Singleton
 
 @Module(includes = [AppModule::class])
@@ -28,9 +26,9 @@ class RoomModule(private var application: Application) {
         return database.commentDao()
     }
 
-    @Singleton
     @Provides
-    fun providesCommentRepository(commentDao: CommentDao?): CommentRepository {
-        return CommentDataSource(commentDao)
+    @Singleton
+    fun provideCommentRepository(commentDao: CommentDao): CommentRepository {
+        return CommentRepository(commentDao)
     }
 }
